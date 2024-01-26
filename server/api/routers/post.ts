@@ -7,7 +7,7 @@ export const postRouter = createTRPCRouter({
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
     .query(async ({ input }) => {
-      await sleep(20000);
+      await sleep(2000);
       return {
         greeting: `Hello ${input.text}`,
       };
