@@ -1,8 +1,15 @@
 import React, { Suspense } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Hello } from "@/components/Hello";
+import { api } from "@/trpc/react";
 
 export default function Page() {
+  const utils = api.useUtils();
+
+  const handleRefetch = () => {
+    utils.post.hello.reset();
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.main}>
@@ -10,6 +17,9 @@ export default function Page() {
         <Suspense fallback={<Text>Loading...</Text>}>
           <Hello />
         </Suspense>
+        <TouchableOpacity style={styles.button} onPress={handleRefetch}>
+          <Text style={styles.buttonText}>Refetch</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -27,7 +37,7 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 8,
     justifyContent: "center",
-    alignItems: "stretch",
+    alignItems: "flex-start",
     maxWidth: 640,
     paddingHorizontal: 24,
   },
@@ -42,5 +52,13 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "80%",
+  },
+  button: {
+    backgroundColor: "black",
+    padding: 10,
+    borderRadius: 10
+  },
+  buttonText: {
+    color: "white",
   },
 });
