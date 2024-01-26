@@ -1,4 +1,4 @@
-# Example cross-plataform full stack apps with typesafety
+# Expo API Routes + tRPC
 
 ## Features
 
